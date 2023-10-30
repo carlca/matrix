@@ -11,8 +11,8 @@ fn find(s: String, sub: String) -> Int:
 			return i
 	return -1 
 
-fn main():
+fn main() raises:
 	let s = "It was the best of times"
 	print(find(s, "was"))
-
+	
 	

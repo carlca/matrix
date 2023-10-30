@@ -1,5 +1,3 @@
-from utils.vector import InlinedFixedVector
-
 struct Matrix:
 	'''Simple 2d matrix that uses Float64.'''
 
@@ -7,14 +5,24 @@ struct Matrix:
 	var cols: Int
 	var total_items: Int
 	var data: Pointer[Float64]
+	var debugging: Bool
 
 	fn __init__(inout self, rows: Int, cols: Int) -> None:
+		self.debugging = False
 		self.rows = rows if rows > 0 else 1
 		self.cols = cols if cols > 0 else 1 
 		self.total_items = self.rows * self.cols
 		self.data = Pointer[Float64].alloc(self.total_items) 
 		for i in range(self.total_items):
 			self.data.store(i, 0.0)
+
+	fn dbg(borrowed self, msg: String, value: String) -> None:
+		if self.debugging:
+			print(msg, value)
+
+	fn dbg(borrowed self, msg: String, value: Int) -> None:
+		if self.debugging:
+			print(msg, value)
 
 	fn __getitem__(borrowed self, row: Int, col: Int) -> Float64:
 		let index = row * self.cols + col
@@ -40,6 +48,7 @@ struct Matrix:
 		self.rows = other.rows
 		self.cols = other.cols
 		self.total_items = other.total_items
+		self.debugging = other.debugging
 		self.data = Pointer[Float64].alloc(self.total_items)
 		memcpy[Float64](self.data, other.data, self.total_items)
 
@@ -198,38 +207,28 @@ struct Matrix:
 				return i
 		return -1 
 
-	fn split(borrowed self, s: String, sep: String) -> DynamicVector[String]:
-		var result: DynamicVector[String] = DynamicVector[String]()
-		var start = 0
-		var end = s.__len__()
-		while start < end:
-			var index = self.find(s, sep, start)
-			if index == -1:
-				break
-			var element = s[start:index]
-			result.push_back(*element)
-
-
-			result.append(element)
-			start = index + len(sep)
-			var element = s[start, index]
-
-				result.append(s[start:end])
-				start = end + 1
-			end += 1
-		result.append(s[start:end])
+	fn split(borrowed self, s: String, sep: String) -> String:
+		var s1 = s
+		var result = String()
+		var index = self.find(s1, sep, 0)
+		while index >= 0:
+			result += s1[0:index] + "\n"
+			s1 = s1[index + sep.__len__():s1.__len__()]
+			index = self.find(s1, sep, 0)
+		if s1.__len__() > 0:
+			result += s1
 		return result
 
-	fn set_data_as_string(inout self, data_string: String) -> None:
-		var rowStrings = self.trim(data_string, '[', ']') #.split('], [')
-			self.rows = rowStrings.length
-			self.cols = rowStrings[0].split(', ').length
-			self.data = Pointer(Float64).allocate(self.rows * self.cols)
+	# fn set_data_as_string(inout self, data_string: String) -> None:
+	# 	var rowStrings = self.trim(data_string, '[', ']') #.split('], [')
+	# 		self.rows = rowStrings.length
+	# 		self.cols = rowStrings[0].split(', ').length
+	# 		self.data = Pointer(Float64).allocate(self.rows * self.cols)
 
-			for i in 0..<self.rows
-				var row = rowStrings[i].split(', ')
-				for j in 0..<self.cols
-					self.data[i * self.cols + j] = Float64(row[j])
+	# 		for i in 0..<self.rows
+	# 			var row = rowStrings[i].split(', ')
+	# 			for j in 0..<self.cols
+	# 				self.data[i * self.cols + j] = Float64(row[j])
 
 	fn print_shape (borrowed self) -> None:
 		print("(", self.rows, ", ", self.cols, ")")
