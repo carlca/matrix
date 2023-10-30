@@ -213,7 +213,7 @@ struct Matrix:
 		var index = self.find(s1, sep, 0)
 		while index >= 0:
 			result += s1[0:index] + "\n"
-			s1 = s1[index + sep.__len__():s1.__len__()]
+			s1 = s1[index + len(sep):len(s1)]
 			index = self.find(s1, sep, 0)
 		if s1.__len__() > 0:
 			result += s1
