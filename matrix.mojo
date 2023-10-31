@@ -1,3 +1,5 @@
+from list import list
+
 struct Matrix:
 	'''Simple 2d matrix that uses Float64.'''
 
@@ -184,51 +186,6 @@ struct Matrix:
 			result = result + "], " if i != self.rows - 1 else result + "]"
 		result = result + "]"
 		return result
-
-	fn trim(borrowed self, s: String, leading: String, trailing: String) -> String:
-		var start = 0
-		var end = s.__len__()
-		while start < end and s[start] == leading:
-			start += 1
-		while end > start and s[end - 1] == trailing:
-			end -= 1
-		return s[start:end]
-
-	fn find(self, s: String, sub: String, start: Int) -> Int:
-		let len = s.__len__()
-		let sub_len = sub.__len__()
-		for i in range(start, len - sub_len + 1):
-			var is_match = True
-			for j in range(sub_len):
-				if s[i + j] != sub[j]:
-					is_match = False
-					break
-			if is_match:
-				return i
-		return -1 
-
-	fn split(borrowed self, s: String, sep: String) -> String:
-		var s1 = s
-		var result = String()
-		var index = self.find(s1, sep, 0)
-		while index >= 0:
-			result += s1[0:index] + "\n"
-			s1 = s1[index + len(sep):len(s1)]
-			index = self.find(s1, sep, 0)
-		if s1.__len__() > 0:
-			result += s1
-		return result
-
-	# fn set_data_as_string(inout self, data_string: String) -> None:
-	# 	var rowStrings = self.trim(data_string, '[', ']') #.split('], [')
-	# 		self.rows = rowStrings.length
-	# 		self.cols = rowStrings[0].split(', ').length
-	# 		self.data = Pointer(Float64).allocate(self.rows * self.cols)
-
-	# 		for i in 0..<self.rows
-	# 			var row = rowStrings[i].split(', ')
-	# 			for j in 0..<self.cols
-	# 				self.data[i * self.cols + j] = Float64(row[j])
 
 	fn print_shape (borrowed self) -> None:
 		print("(", self.rows, ", ", self.cols, ")")
