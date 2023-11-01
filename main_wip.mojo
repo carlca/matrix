@@ -15,12 +15,12 @@ from testing import assert_equal
 		let m3 = m1 + m2
 		_ = assert_equal(m3.data, [[8, 10, 12], [14, 16, 18]])
 
-	fn test_sub(self):
-		m1 = Matrix(2, 3)
-		m2 = Matrix(2, 3)
+	fn test_sub():
+		let m1 = Matrix(2, 3)
+		let m2 = Matrix(2, 3)
 		m1.data = [[1, 2, 3], [4, 5, 6]]
 		m2.data = [[7, 8, 9], [10, 11, 12]]
-		m3 = m1 - m2
+		let m3 = m1 - m2
 		self.assert_equal(m3.data, [[-6, -6, -6], [-6, -6, -6]])
 
 	fn test_mul(self):
@@ -48,3 +48,11 @@ from testing import assert_equal
 		m1.data = [[1, 2, 3], [4, 5, 6]]
 		m2 = m1.map(lambda x: x * 2)
 		self.assert_equal(m2.data, [[2, 4, 6], [8, 10, 12]])
+
+	fn test_map_static(self):
+		m1 = Matrix(2, 3)
+		m1.data = [[1, 2, 3], [4, 5, 6]]
+		m2 = Matrix.map_static(m1, lambda x: x * 2)
+		self.assert_equal(m2.data, [[2, 4, 6], [8, 10, 12]])
+
+	

@@ -8,7 +8,7 @@
 			"type": "mojo-lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "${workspaceFolder}/<your program>",
+			"program": "${workspaceFolder}/mojopy.mojo",
 			"args": [],
 			"env": [],
 			"cwd": "${workspaceFolder}"

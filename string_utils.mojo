@@ -49,9 +49,9 @@ fn find(s: String, sub: String, start: Int) -> Int:
 			return i
 	return -1 
 
-fn split(s: String, sep: String) -> String: # list[String]:
+fn split_to_strings(s: String, sep: String) -> String: 
 	var s1 = s
-	var result = String() # list[String] = list[String]()
+	var result = String() 
 	var index = find(s1, sep, 0)
 	while index >= 0:
 		result += s1[0:index] + "\n"
@@ -61,7 +61,7 @@ fn split(s: String, sep: String) -> String: # list[String]:
 		result += s1
 	return result
 
-fn split_to_list(s: String, sep: String) -> list[String]:
+fn split(s: String, sep: String) -> list[String]:
 	var s1 = s
 	var result: list[String] = list[String]()
 	var index = find(s1, sep, 0)
@@ -71,4 +71,13 @@ fn split_to_list(s: String, sep: String) -> list[String]:
 		index = find(s1, sep, 0)
 	if len(s1) > 0:
 		result.append(s1)
+	return result
+
+fn remove_spaces(s: String) -> String:
+	var result = String()
+	var c: String = ""
+	for i in range(len(s)):
+		c = s[i]
+		if c != " ":
+			result += c
 	return result

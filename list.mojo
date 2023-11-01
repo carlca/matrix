@@ -9,10 +9,12 @@ struct list[T: AnyType]:
 
 	var _internal_string: String
 	var _end_of_strings: DynamicVector[Int]
+	var iter_index: Int
 
 	fn __init__(inout self):
 		self._internal_string = ""
 		self._end_of_strings = DynamicVector[Int]()
+		self.iter_index = 0
 
 	fn __init__(inout self, input_value: String):
 		self._internal_string = ""
@@ -52,8 +54,18 @@ struct list[T: AnyType]:
 		result += "]"
 		return result
 
+	fn __iter__(self: Self) raises -> Self:
+		return self
+
+	fn __next__(inout self: Self) raises -> String:
+		if self.iter_index >= self.__len__():
+			raise Error()
+		self.iter_index = self.iter_index + 1
+		return self.__getitem__(self.iter_index - 1)
+			
 	fn str(borrowed self) raises -> String:
 		var result: String = ""
 		for i in range(self.__len__()):
-			result += self.__getitem__(i) + "\n"
+			result += self.__getitem__(i)
+			if i < self.__len__() - 1: result += "\n"
 		return result

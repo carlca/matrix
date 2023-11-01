@@ -1,4 +1,5 @@
 from list import list
+import string_utils as su
 
 struct Matrix:
 	'''Simple 2d matrix that uses Float64.'''
@@ -17,6 +18,17 @@ struct Matrix:
 		self.data = Pointer[Float64].alloc(self.total_items) 
 		for i in range(self.total_items):
 			self.data.store(i, 0.0)
+
+	# fn __init__(inout self, content: String) -> None:
+	# 	var s = content
+	# 	s = su.remove_spaces(s)
+	# 	s = su.trim(s, "[", "]")
+	# 	s = su.trim(s, "'", "'")
+	# 	var rows = su.split(s, "','")
+	# 	self.rows = rows.__len__()
+	# 	for row in rows:
+	# 		self.cols = max(self.cols, row.count(',') + 1)
+
 
 	fn dbg(borrowed self, msg: String, value: String) -> None:
 		if self.debugging:
