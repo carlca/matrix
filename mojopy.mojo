@@ -48,8 +48,8 @@ fn main() raises:
 	print("")	
 
 	print("Using 'for sl in spl':")
-		for sl in spl:
-			print(sl)
+	for sl in spl:
+		print(sl)
 
 	print ("It works!\n")
 
