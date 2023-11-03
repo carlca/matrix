@@ -1,6 +1,7 @@
 from matrix import Matrix
-from list import list
 import string_utils as su
+from python import Python
+from list import List 
 
 fn main() raises:
 	var s: String = "[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]"
@@ -32,7 +33,7 @@ fn main() raises:
 
 	print("")
 	print("remove_spaces")
-	var sr = su.remove_spaces("['1.1, 1.1, 1.1', '2.2, 2.2, 2.2', '3.3, 3.3, 3.3', '4.4, 4.4, 4.4']")
+	var sr = su.remove_char("['1.1, 1.1, 1.1', '2.2, 2.2, 2.2', '3.3, 3.3, 3.3', '4.4, 4.4, 4.4']", " ")
 	print(sr)
 	sr = su.trim(sr, "[", "]")
 	print(sr)
@@ -40,15 +41,29 @@ fn main() raises:
 	print(sr)
 	print("")	
 	
-	print("Using spl.str():")
 	spl = su.split(sr, "','")
+	
+	print("Using spl.str():")
 	print(spl.str())
 	print("")	
-	print("Using 'for Sl in spl':")
-	
-	try:
+
+	print("Using 'for sl in spl':")
 		for sl in spl:
 			print(sl)
-	except:
-		None
-	print ("It works!")
+
+	print ("It works!\n")
+
+	print("Parsing each row:")
+	let first = spl[0]
+	print(first)
+	print(su.count_char(first, ','))
+	print("")
+
+	print("Pythom pi")
+	let col = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679"
+	let pi = Python.evaluate("float(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679)")
+	print(pi)
+	print(pi * 4 * 4)	
+	
+	
+

@@ -1,8 +1,8 @@
 from utils.vector import DynamicVector
-from list_iter import ListIter
+from listt_iter import ListIter
 
 @value
-struct List:
+struct List[T: AnyType]:
 	"""This does not have the same behavior as python at all regarding references.
 	But it helps us code things without having real lists available, and it's memory efficient.
 	Replace by the list provided by mojo ASAP.
@@ -22,11 +22,6 @@ struct List:
 		self._end_of_strings = DynamicVector[Int]()
 		for i in range(len(input_value)):
 			self.append(input_value[i])
-
-	fn __copyinit__(inout self, other: Self):
-		self._internal_string = other._internal_string
-		self._end_of_strings = other._end_of_strings
-		self.iter_index = other.iter_index
 
 	fn append(inout self, value: String):
 		self._internal_string += value
@@ -51,12 +46,6 @@ struct List:
 	fn __len__(self) -> Int:
 		return len(self._end_of_strings)
 
-	fn size(self) -> Int:
-		return self.__len__()	
-
-	fn len(self) -> Int:
-		return self.__len__()
-
 	fn __str__(self: Self) raises -> String:
 		var result: String = "["
 		for i in range(self.__len__()):
@@ -66,9 +55,9 @@ struct List:
 		result += "]"
 		return result
 
-	fn __iter__(self: Self) -> ListIter:
-		return self
-
+	fn __iter__(self) -> ListIter[T]:
+		return ListIter(self)
+		
 	fn str(borrowed self) raises -> String:
 		var result: String = ""
 		for i in range(self.__len__()):

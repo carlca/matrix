@@ -1,4 +1,4 @@
-from list import list
+from list import List
 
 fn __string__mul__(input_string: String, n: Int) -> String:
 	var result: String = ""
@@ -61,9 +61,9 @@ fn split_to_strings(s: String, sep: String) -> String:
 		result += s1
 	return result
 
-fn split(s: String, sep: String) -> list[String]:
+fn split(s: String, sep: String) -> List:
 	var s1 = s
-	var result: list[String] = list[String]()
+	var result: List = List()
 	var index = find(s1, sep, 0)
 	while index >= 0:
 		result.append(s1[0:index])
@@ -73,11 +73,20 @@ fn split(s: String, sep: String) -> list[String]:
 		result.append(s1)
 	return result
 
-fn remove_spaces(s: String) -> String:
+fn remove_char(s: String, char: String) -> String:
 	var result = String()
-	var c: String = ""
-	for i in range(len(s)):
-		c = s[i]
-		if c != " ":
-			result += c
+	if char.__len__() == 1:
+		var c: String = ""
+		for i in range(len(s)):
+			c = s[i]
+			if c != char:
+				result += c
 	return result
+
+fn count_char(s: String, char: String) -> Int:
+	var count = 0
+	if char.__len__() == 1:
+		for i in range(len(s)):
+			if s[i] == char:
+				count += 1
+	return count

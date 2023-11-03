@@ -1,4 +1,5 @@
-from list import list
+# from list import list
+from math import max
 import string_utils as su
 
 struct Matrix:
@@ -21,13 +22,33 @@ struct Matrix:
 
 	# fn __init__(inout self, content: String) -> None:
 	# 	var s = content
-	# 	s = su.remove_spaces(s)
+	# 	try: s = su.remove_char(s, " ")	except: None
 	# 	s = su.trim(s, "[", "]")
 	# 	s = su.trim(s, "'", "'")
 	# 	var rows = su.split(s, "','")
-	# 	self.rows = rows.__len__()
-	# 	for row in rows:
-	# 		self.cols = max(self.cols, row.count(',') + 1)
+	# 	var this_count = 0
+	# 	var last_count = 0
+	# 	try:
+	# 		# Check if all rows in `content` have the same number of columns 
+	# 		for row in rows:
+	# 			this_count = su.count_char(row, ",")
+	# 			if this_count != last_count and last_count != 0:
+	# 				print("Error: Matrix dimensions of `content` must match")
+	# 				return
+	# 		# Parse each row of `content` and store it in `self`
+	# 		self.rows = rows.__len__()
+	# 		self.cols = this_count + 1
+	# 		self.total_items = self.rows * self.cols
+	# 		self.data = Pointer[Float64].alloc(self.total_items)
+	# 		var i = 0
+	# 		for row in rows:
+	# 			var cols = su.split(row, ",")
+	# 			for col in cols:
+	# 				self.data.store(i, Float64(col))
+	# 				i += 1
+	# 	except:
+	# 		None
+		
 
 
 	fn dbg(borrowed self, msg: String, value: String) -> None:
