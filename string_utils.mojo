@@ -36,6 +36,9 @@ fn trim(s: String, leading: String, trailing: String) -> String:
 		end -= 1
 	return s[start:end]
 
+fn find(s: String, sub: String) -> Int:
+	return find(s, sub, 0)
+
 fn find(s: String, sub: String, start: Int) -> Int:
 	let len = s.__len__()
 	let sub_len = sub.__len__()
@@ -90,3 +93,16 @@ fn count_char(s: String, char: String) -> Int:
 			if s[i] == char:
 				count += 1
 	return count
+
+fn substr(s: String, start: Int, length: Int) -> String:
+	return s[start:start+length]
+
+fn substr(s: String, start: Int) -> String:
+	let length = len(s) - start
+	return s[start:start+length]
+
+fn build_string(char: String, length: Int) -> String:
+	var result = String()
+	for _ in range(length):
+		result += char
+	return result

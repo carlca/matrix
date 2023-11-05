@@ -1,17 +1,28 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "mojo-lldb",
+			"type": "lldb",
 			"request": "launch",
-			"name": "Debug",
-			"program": "${workspaceFolder}/mojopy.mojo",
+			"name": "Launch",
+			"program": "${workspaceFolder}/mojopy",
 			"args": [],
-			"env": [],
 			"cwd": "${workspaceFolder}"
-		}
-	]
+		},
+
+	{
+		"type": "mojo-lldb",
+		"request": "launch",
+		"name": "Debug mojopy.mojo",
+		"program": "/users/carlcaulkett/.modular/pkg/packages.modular.com_mojo/bin/mojo",
+		"args": [
+			"run",
+			"-I",
+			".",
+			"/users/carlcaulkett/code/mojo/matrix/mojopy.mojo",
+		],
+		"env": [],
+		"cwd": "${workspaceRoot}"
+	}]
 }
+	

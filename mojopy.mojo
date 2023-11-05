@@ -1,15 +1,31 @@
 from matrix import Matrix
-import string_utils as su
 from python import Python
+from python import PythonObject
 from list import List 
 
-fn main() raises:
-	var s: String = "[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]"
-	print(s)
+import string_utils as su
+import float_utils as fu
 
-	print("")
+fn main() raises:
+
+	let pi_str = "3.1415926"
+	let pi = fu.str_to_float(pi_str)
+	print(pi)
+
+	let a = [[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]] 
+	print(len(a))
+	print(a.get[2, ListLiteral[FloatLiteral, FloatLiteral, FloatLiteral]]())
+	
+
+	var s: String = "[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]"
+	# let mm = Matrix(s)
+	# print("mm.print()")
+	# mm.print()
+	
+	print("---------")
 
 	let m = Matrix(2, 3)
+	print(s)
 	s = su.trim(s, '[', ']')
 	print(s)
 
@@ -59,11 +75,6 @@ fn main() raises:
 	print(su.count_char(first, ','))
 	print("")
 
-	print("Python pi")
-	let col = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679"
-	let pi = Python.evaluate("float(3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679)")
-	print(pi)
-	print(pi * 4 * 4)	
 	
 	
 

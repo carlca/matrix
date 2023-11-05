@@ -1,6 +1,7 @@
-# from list import list
 from math import max
 import string_utils as su
+from list import List
+from python import PythonObject
 
 struct Matrix:
 	'''Simple 2d matrix that uses Float64.'''
@@ -20,36 +21,51 @@ struct Matrix:
 		for i in range(self.total_items):
 			self.data.store(i, 0.0)
 
-	# fn __init__(inout self, content: String) -> None:
+	# fn __init__(inout self, content: String) raises -> None:
+	# 	self.debugging = True	
+	# 	self.rows = 0
+	# 	self.cols = 0
+	# 	self.total_items = 0
+	# 	self.data = Pointer[Float64].alloc(1)
 	# 	var s = content
-	# 	try: s = su.remove_char(s, " ")	except: None
+	# 	s = su.remove_char(s, " ")
 	# 	s = su.trim(s, "[", "]")
 	# 	s = su.trim(s, "'", "'")
-	# 	var rows = su.split(s, "','")
+	# 	let rows = su.split(s, "],[")
 	# 	var this_count = 0
-	# 	var last_count = 0
+	# 	let last_count = 0
+	# 	# Check if all rows in `content` have the same number of columns 
 	# 	try:
-	# 		# Check if all rows in `content` have the same number of columns 
+	# 		print("Checking content for consistency...")
 	# 		for row in rows:
 	# 			this_count = su.count_char(row, ",")
+	# 			print("row", row)
+	# 			print("comma count", this_count)
 	# 			if this_count != last_count and last_count != 0:
 	# 				print("Error: Matrix dimensions of `content` must match")
-	# 				return
-	# 		# Parse each row of `content` and store it in `self`
-	# 		self.rows = rows.__len__()
-	# 		self.cols = this_count + 1
-	# 		self.total_items = self.rows * self.cols
-	# 		self.data = Pointer[Float64].alloc(self.total_items)
-	# 		var i = 0
-	# 		for row in rows:
-	# 			var cols = su.split(row, ",")
-	# 			for col in cols:
-	# 				self.data.store(i, Float64(col))
-	# 				i += 1
+	# 			else:
+	# 				# Parse each row of `content` and store it in `self`
+	# 				self.rows = rows.len()
+	# 				self.cols = this_count + 1
+	# 				print("matrix.rows", self.rows)
+	# 				print("matrix.cols", self.cols)
+	# 				self.total_items = self.rows * self.cols
+	# 				self.data = Pointer[Float64].alloc(self.total_items)
+	# 				var i = 0
+	# 				var p: PythonObject
+	# 				let f: Float64
+	# 				for row in rows:
+	# 					let cols = su.split(row, ",")
+	# 					for col in cols:
+	# 						print("i", i)
+	# 						print("col", col)
+
+	# 						p = PythonObject(col)
+	# 						f = p.to_float64()
+	# 						self.data.store(i, f)
+	# 						i += 1
 	# 	except:
 	# 		None
-		
-
 
 	fn dbg(borrowed self, msg: String, value: String) -> None:
 		if self.debugging:

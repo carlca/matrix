@@ -5,7 +5,7 @@ from list_iter import ListIter
 struct List:
 	"""This does not have the same behavior as python at all regarding references.
 	But it helps us code things without having real lists available, and it's memory efficient.
-	Replace by the list provided by mojo ASAP.
+	Replace with the list provided by mojo ASAP.
 	"""
 
 	var _internal_string: String
