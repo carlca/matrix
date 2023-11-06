@@ -1,7 +1,9 @@
 from math import max
-import string_utils as su
 from list import List
 from python import PythonObject
+
+import string_utils as su
+import float_utils as fu
 
 struct Matrix:
 	'''Simple 2d matrix that uses Float64.'''
@@ -21,51 +23,45 @@ struct Matrix:
 		for i in range(self.total_items):
 			self.data.store(i, 0.0)
 
-	# fn __init__(inout self, content: String) raises -> None:
-	# 	self.debugging = True	
-	# 	self.rows = 0
-	# 	self.cols = 0
-	# 	self.total_items = 0
-	# 	self.data = Pointer[Float64].alloc(1)
-	# 	var s = content
-	# 	s = su.remove_char(s, " ")
-	# 	s = su.trim(s, "[", "]")
-	# 	s = su.trim(s, "'", "'")
-	# 	let rows = su.split(s, "],[")
-	# 	var this_count = 0
-	# 	let last_count = 0
-	# 	# Check if all rows in `content` have the same number of columns 
-	# 	try:
-	# 		print("Checking content for consistency...")
-	# 		for row in rows:
-	# 			this_count = su.count_char(row, ",")
-	# 			print("row", row)
-	# 			print("comma count", this_count)
-	# 			if this_count != last_count and last_count != 0:
-	# 				print("Error: Matrix dimensions of `content` must match")
-	# 			else:
-	# 				# Parse each row of `content` and store it in `self`
-	# 				self.rows = rows.len()
-	# 				self.cols = this_count + 1
-	# 				print("matrix.rows", self.rows)
-	# 				print("matrix.cols", self.cols)
-	# 				self.total_items = self.rows * self.cols
-	# 				self.data = Pointer[Float64].alloc(self.total_items)
-	# 				var i = 0
-	# 				var p: PythonObject
-	# 				let f: Float64
-	# 				for row in rows:
-	# 					let cols = su.split(row, ",")
-	# 					for col in cols:
-	# 						print("i", i)
-	# 						print("col", col)
-
-	# 						p = PythonObject(col)
-	# 						f = p.to_float64()
-	# 						self.data.store(i, f)
-	# 						i += 1
-	# 	except:
-	# 		None
+	fn __init__(inout self, content: String) raises -> None:
+		self.debugging = True	
+		self.rows = 0
+		self.cols = 0
+		self.total_items = 0
+		self.data = Pointer[Float64].alloc(1)
+		var s = content
+		s = su.remove_char(s, " ")
+		s = su.trim(s, "[", "]")
+		s = su.trim(s, "'", "'")
+		let rows = su.split(s, "],[")
+		var this_count = 0
+		let last_count = 0
+		# Check if all rows in `content` have the same number of columns 
+		try:
+			print("Checking content for consistency...")
+			for row in rows:
+				this_count = su.count_char(row, ",")
+				# print("row", row)
+				# print("comma count", this_count)
+				if this_count != last_count and last_count != 0:
+					print("Error: Matrix dimensions of `content` must match")
+				else:
+					# Parse each row of `content` and store it in `self`
+					self.rows = rows.len()
+					self.cols = this_count + 1
+					# print("matrix.rows", self.rows)
+					# print("matrix.cols", self.cols)
+					self.total_items = self.rows * self.cols
+					self.data = Pointer[Float64].alloc(self.total_items)
+					var i = 0
+					for row in rows:
+						let cols = su.split(row, ",")
+						for col in cols:
+							let f = fu.str_to_float(col)
+							self.data.store(i, f)
+							i += 1
+		except:
+			None
 
 	fn dbg(borrowed self, msg: String, value: String) -> None:
 		if self.debugging:
@@ -224,12 +220,24 @@ struct Matrix:
 	fn print (borrowed self) -> None:
 		print(self.get_data_as_string())
 
+	fn print_to(borrowed self, places: Int) -> None:
+		print(self.get_data_as_string(places))
+	
 	fn get_data_as_string(borrowed self) -> String:
+		return self.get_data_as_string(0)
+
+	fn get_data_as_string(borrowed self, places: Int) -> String:
 		var result: String = "["
 		for i in range(self.rows):
 			result += "["
 			for j in range(self.cols):
-				result += self[i, j]
+				if places == 0:
+					result += self[i, j]
+				else:
+					try:
+						result += fu.round_to(self[i, j], places)
+					except:
+						result += self[i, j]	
 				if j != self.cols - 1:
 					result += ", "
 			result = result + "], " if i != self.rows - 1 else result + "]"

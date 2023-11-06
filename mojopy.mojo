@@ -10,7 +10,8 @@ fn main() raises:
 
 	let pi_str = "3.1415926"
 	let pi = fu.str_to_float(pi_str)
-	print(pi)
+	print(pi) # 3.1415926000000001
+	
 
 	let a = [[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]] 
 	print(len(a))
@@ -18,9 +19,9 @@ fn main() raises:
 	
 
 	var s: String = "[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]"
-	# let mm = Matrix(s)
-	# print("mm.print()")
-	# mm.print()
+	let mm = Matrix(s)
+	print("mm.print()")
+	mm.print_to(1)
 	
 	print("---------")
 

@@ -1,7 +1,8 @@
 import float_utils as fu
+from math import log10
 
 fn main() raises:
-
-	let pi_str = "3.1415926"
-	let pi = fu.str_to_float(pi_str)
-	print(pi) # 3.1415926000000001
+	let pi = 3.1415926234534563
+	print("pi: ", pi)
+	print(fu.print_to(pi, 5)) # 3.1415926
+	
