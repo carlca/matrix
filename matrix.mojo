@@ -226,6 +226,9 @@ struct Matrix:
 	fn get_data_as_string(borrowed self) -> String:
 		return self.get_data_as_string(0)
 
+	fn string_to(borrowed self, places: Int) -> String:
+		return self.get_data_as_string(places)
+
 	fn get_data_as_string(borrowed self, places: Int) -> String:
 		var result: String = "["
 		for i in range(self.rows):
@@ -234,10 +237,7 @@ struct Matrix:
 				if places == 0:
 					result += self[i, j]
 				else:
-					try:
-						result += fu.round_to(self[i, j], places)
-					except:
-						result += self[i, j]	
+					result += fu.format_float(self[i, j], places)
 				if j != self.cols - 1:
 					result += ", "
 			result = result + "], " if i != self.rows - 1 else result + "]"
@@ -277,7 +277,8 @@ struct Matrix:
 			self[i, col] = other[i, 0]
 
 	fn get_slice (borrowed self, row_start: Int, row_end: Int, col_start: Int, col_end: Int) -> Matrix:
-		if row_start < 0 or row_start >= self.rows or row_end < 0 or row_end >= self.rows or col_start < 0 or col_start >= self.cols or col_end < 0 or col_end >= self.cols:
+		if row_start < 0 or row_start >= self.rows or row_end < 0 or row_end >= self.rows 
+			or col_start < 0 or col_start >= self.cols or col_end < 0 or col_end >= self.cols:
 			print("Error: Index out of bounds")
 			return Matrix(1, 1)
 		let result = Matrix(row_end - row_start + 1, col_end - col_start + 1)

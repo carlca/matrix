@@ -10,12 +10,10 @@ struct List:
 
 	var _internal_string: String
 	var _end_of_strings: DynamicVector[Int]
-	var iter_index: Int
-
+	
 	fn __init__(inout self):
 		self._internal_string = ""
 		self._end_of_strings = DynamicVector[Int]()
-		self.iter_index = 0
 
 	fn __init__(inout self, input_value: String):
 		self._internal_string = ""
@@ -26,7 +24,6 @@ struct List:
 	fn __copyinit__(inout self, other: Self):
 		self._internal_string = other._internal_string
 		self._end_of_strings = other._end_of_strings
-		self.iter_index = other.iter_index
 
 	fn append(inout self, value: String):
 		self._internal_string += value

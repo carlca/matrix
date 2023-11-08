@@ -7,45 +7,31 @@ import string_utils as su
 import float_utils as fu
 
 fn main() raises:
-
-	let pi_str = "3.1415926"
-	let pi = fu.str_to_float(pi_str)
-	print(pi) # 3.1415926000000001
-	
-
-	let a = [[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]] 
-	print(len(a))
-	print(a.get[2, ListLiteral[FloatLiteral, FloatLiteral, FloatLiteral]]())
-	
-
-	var s: String = "[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]"
-	let mm = Matrix(s)
+	let s1: String = "[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]"
+	let mm = Matrix(s1)
 	print("mm.print()")
-	mm.print_to(1)
+	let s2: String = mm.string_to(1)
+	if s1 == s2:
+		print("s1 = s2!")
 	
 	print("---------")
-
-	let m = Matrix(2, 3)
-	print(s)
-	s = su.trim(s, '[', ']')
-	print(s)
 
 	print("")
 
 	print("split + str")
-	var spl = su.split(s, '], [')
+	var spl = su.split(s1, '], [')
 	print (spl.str())
 
 	print("")
 
 	print("split + __str__")
-	spl = su.split(s, '], [')
+	spl = su.split(s1, '], [')
 	print (spl.__str__())
 
 	print("")
 
 	print("split_to_strings")
-	let sps = su.split_to_strings(s, '], [')
+	let sps = su.split_to_strings(s1, '], [')
 	print (sps)
 
 	print("")
