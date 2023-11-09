@@ -6,8 +6,8 @@ fn run_tests():
 	try:
 		for i in range(tests.__len__()):
 			if not tests[i]():
-				print("test:", i, "failed!")
+				print("test:", i + 1, "failed!")
 			else:
-				print("test:", i, "passed!")
+				print("test:", i + 1, "passed!")
 	except:
 		None

@@ -38,19 +38,14 @@ struct Matrix:
 		let last_count = 0
 		# Check if all rows in `content` have the same number of columns 
 		try:
-			print("Checking content for consistency...")
 			for row in rows:
 				this_count = su.count_char(row, ",")
-				# print("row", row)
-				# print("comma count", this_count)
 				if this_count != last_count and last_count != 0:
 					print("Error: Matrix dimensions of `content` must match")
 				else:
 					# Parse each row of `content` and store it in `self`
 					self.rows = rows.len()
 					self.cols = this_count + 1
-					# print("matrix.rows", self.rows)
-					# print("matrix.cols", self.cols)
 					self.total_items = self.rows * self.cols
 					self.data = Pointer[Float64].alloc(self.total_items)
 					var i = 0
