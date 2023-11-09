@@ -113,7 +113,7 @@ struct Matrix:
 		if self.rows != other.rows or self.cols != other.cols:
 			print("Error: Matrix dimensions must match")
 			return Matrix(1, 1)
-		let result = Matrix(self.rows, self.cols)
+		var result = Matrix(self.rows, self.cols)
 		for i in range(self.rows):
 			for j in range(self.cols):
 				result[i, j] = self[i, j] + other[i, j]

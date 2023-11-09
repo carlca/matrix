@@ -1,15 +1,15 @@
 from matrix import Matrix
-from tee_test import Test 
+import tee_test as tt
 
-struct MatrixTests:
+fn add_tests():
+    tt.tests.push_back(test_matrix_methods)
 
-	var tests: Test
+fn test_matrix_methods() raises -> Bool:
+    let m1 = Matrix("[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]")
+    let m2 = Matrix("[[1.1, 1.1, 1.1], [1.1, 1.1, 1.1], [1.1, 1.1, 1.1], [1.1, 1.1, 1.1]]")
+    let m3 = m1 + m2
+    return m3.string_to(1) == "[[2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4], [5.5, 5.5, 5.5]]"
 
-	fn __init__(inout self):
-		self.tests = Test()
-
-	fn test_matrix_methods(borrowed self) raises -> Bool:
-		var m1 = Matrix("[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]")
-		var m2 = Matrix("[[1.1, 1.1, 1.1], [1.1, 1.1, 1.1], [1.1, 1.1, 1.1], [1.1, 1.1, 1.1]]")
-		var m3 = m1 + m2
-		return m3.string_to(1) == "[[2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4], [5.5, 5.5, 5.5]]"
+fn main():
+	add_tests()
+	tt.run_tests()

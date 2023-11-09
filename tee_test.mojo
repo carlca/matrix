@@ -1,12 +1,13 @@
 from utils.vector import DynamicVector
 
-struct Test:
-	'''A simple test framework in pure Mojo.'''
-	var _test_count: Int
-	var _tests: DynamicVector[fn() -> Bool]
+var tests: DynamicVector[fn() raises -> Bool] = DynamicVector[fn() raises -> Bool]()
 
-	fn __init__(inout self) -> None:
-		var _tests = DynamicVector[fn() -> Bool]()
-
-	fn add(inout self, func: fn() -> Bool):
-		self._tests.push_back(func)
+fn run_tests():
+	try:
+		for i in range(tests.__len__()):
+			if not tests[i]():
+				print("test:", i, "failed!")
+			else:
+				print("test:", i, "passed!")
+	except:
+		None
