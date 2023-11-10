@@ -13,7 +13,7 @@ fn str_to_float(s: String) raises -> Float64:
 		for _ in range(len(num_str)):
 			denom_str += "0"
 		let denominator = atol("1" + denom_str)
-		# scholl-level maths here :)
+		# school-level maths here :)
 		let frac = numerator / denominator
 		# return the number as a Float64
 		let result: Float64 = atol(int_str) + frac
