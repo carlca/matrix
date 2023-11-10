@@ -6,8 +6,7 @@ from matrix import Matrix
 import tee_test as tt
 
 fn add_tests():
-		tt.add_test(test_matrix_methods)
-    # tt.tests.push_back(test_matrix_methods)
+	tt.tests.push_back(test_matrix_methods)
 
 fn test_matrix_methods() raises -> Bool:
     let m1 = Matrix("[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]")
