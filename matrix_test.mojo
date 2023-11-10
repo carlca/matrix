@@ -3,10 +3,12 @@
 # Run with: `mojo matrix_test.mojo`
 
 from matrix import Matrix
-import tee_test as tt
+from tee_test import TeeTest
+
+var tests = TeeTest()
 
 fn add_tests():
-	tt.tests.push_back(test_matrix_methods)
+	tests.add_test(test_matrix_methods)
 
 fn test_matrix_methods() raises -> Bool:
     let m1 = Matrix("[[1.1, 1.1, 1.1], [2.2, 2.2, 2.2], [3.3, 3.3, 3.3], [4.4, 4.4, 4.4]]")
@@ -16,4 +18,4 @@ fn test_matrix_methods() raises -> Bool:
 
 fn main():
 	add_tests()
-	tt.run_tests(True)
+	tests.run_tests()
