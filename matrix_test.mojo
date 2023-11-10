@@ -1,7 +1,12 @@
+# matrix_test.mojo
+# 
+# Run with: `mojo matrix_test.mojo`
+
 from matrix import Matrix
 import tee_test as tt
 
 fn add_tests():
+		# tt.add_test(test_matrix_methods)
     tt.tests.push_back(test_matrix_methods)
 
 fn test_matrix_methods() raises -> Bool:
@@ -12,4 +17,4 @@ fn test_matrix_methods() raises -> Bool:
 
 fn main():
 	add_tests()
-	tt.run_tests()
+	tt.run_tests(True)
