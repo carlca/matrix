@@ -23,13 +23,22 @@ struct TeeTest:
 		self.run_tests(True)
 
 	fn run_tests(self, fails_only: Bool):
+		var fail_count = 0
+		var succ_count = 0
 		try:
 			for i in range(self.tests.__len__()):
 				let test_fn = self.tests[i].load()
 				if not test_fn():
 					print("test:", i + 1, "failed!")
+					fail_count += 1
 				else:
+					succ_count += 1	
 					if not fails_only:
 						print("test:", i + 1, "passed!")
+			print("--------------------------------------------")
+			print(" Total number of tests run: ", fail_count + succ_count)
+			print("    Number of tests passed: ", succ_count)
+			print("    Number of tests failed: ", fail_count)
+			print("--------------------------------------------")
 		except:
 			None
